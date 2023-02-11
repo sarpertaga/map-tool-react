@@ -165,7 +165,7 @@ export default function Map() {
 
                 function getInfo() {
                     var data = draw.getAll()
-                    let geo = data.features[0].geometry.coordinates
+                    let geo = data.features
                     //let type = data.features[0].geometry.type
                     setEditor(geo)
                 }
@@ -455,11 +455,11 @@ export default function Map() {
                     width: 500
                     }
                 }>
-                    <span onClick={() => getData()}></span>
-                        {/* <span>
-                            {JSON.stringify(editor)}
-                            {JSON.stringify(type)}
-                        </span> */}
+                    <span onClick={(editor) => getData(JSON.stringify(editor))}></span>
+                        <span>
+                            {/* {JSON.stringify(editor)} */}
+                            {/* {JSON.stringify(type)} */}
+                        </span>
                 </div>
             </form>
             <div ref={mapContainer} className="map">
