@@ -1,0 +1,15 @@
+.files {
+    margin: 0;
+    padding: 0px;
+    background-color: gray;
+    color: bisque;
+    text-align: center;
+}
+
+.files > h1 {
+    padding: 20px;
+    margin: 0;
+    background-color: gray;
+    text-align: center;
+    color: bisque;
+}
