@@ -57,118 +57,25 @@ export default function Map() {
             zoom: zoom,
         });  
 
-            // var geojson = {
-            //     'type': 'FeatureCollection',
-            //     'features': []
-            // };
-             
-            // var linestring = {
-            //     'type': 'Feature',
-            //     'geometry': {
-            //         'type': 'LineString',
-            //         'coordinates': []
-            //     }
-            // };
-  
-            // map.current.on('load', function () {
-            // map.current.addSource('geojson', {
-            //     'type': 'geojson',
-            //     'data': geojson
-            // });
-             
-            // map.current.addLayer({
-            //     id: 'measure-points',
-            //     type: 'circle',
-            //     source: 'geojson',
-            //         paint: {
-            //         'circle-radius': 5,
-            //         'circle-color': '#000'
-            //         },
-            //     filter: ['in', '$type', 'Point']
-            // });
-            // map.current.addLayer({
-            //     id: 'measure-lines',
-            //     type: 'line',
-            //     source: 'geojson',
-            //     layout: {
-            //         'line-cap': 'round',
-            //         'line-join': 'round'
-            //         },
-            //     paint: {
-            //         'line-color': '#000',
-            //         'line-width': 2.5
-            //         },
-            //     filter: ['in', '$type', 'LineString']
-            // });
-             
-            // map.current.on('click', function (e) {
-            // var features = map.current.queryRenderedFeatures(e.point, {
-            // layers: ['measure-points']
-            // });
-             
-            // if (geojson.features.length > 1) geojson.features.pop();
-                          
-            // if (features.length) {
-            // var id = features[0].properties.id;
-            // geojson.features = geojson.features.filter(function (point) {
-            //     return point.properties.id !== id;
-            //     });
-            // } else {
-            // var point = {
-            //     'type': 'Feature',
-            //     'geometry': {
-            //     'type': 'Point',
-            //     'coordinates': [e.lngLat.lng, e.lngLat.lat]
+
+            // var draw = new MapboxDraw({
+            //     displayControlsDefault: true,
+            //     controls: {
+            //         trash: true,
             //     },
-            //     'properties': {
-            //     'id': String(new Date().getTime())
-            //     }
-            // };
-             
-            // geojson.features.push(point);
-            // }
-             
-            // if (geojson.features.length > 1) {
-            // linestring.geometry.coordinates = geojson.features.map(
-            // function (point) {
-            //     return point.geometry.coordinates;
-            // }
-            // );
-             
-            // geojson.features.push(linestring);
-            // }
-             
-            // map.current.getSource('geojson').setData(geojson);
-            // });
-            // });
-             
-            // map.current.on('mousemove', function (e) {
-            // var features = map.current.queryRenderedFeatures(e.point, {
-            // layers: ['measure-points']
-            // });
-
-            // map.current.getCanvas().style.cursor = features.length
-            // ? 'pointer'
-            // : 'crosshair';
-            // });
-            var draw = new MapboxDraw({
-                displayControlsDefault: true,
-                controls: {
-                    trash: true,
-                },
-                });
-                map.current.addControl(draw);
+            //     });
+            //     map.current.addControl(draw);
                 
-                map.current.on('draw.create', getInfo)
-                map.current.on('draw.delete', getInfo)
-                map.current.on('draw.update', getInfo)
+            //     map.current.on('draw.create', getInfo)
+            //     map.current.on('draw.delete', getInfo)
+            //     map.current.on('draw.update', getInfo)
 
-                function getInfo() {
-                    var data = draw.getAll()
-                    let geo = data.features
-                    //let type = data.features[0].geometry.type
-                    setEditor(geo)
-                }
+            //     function getInfo() {
+            //         var data = draw.getAll()
+            //         let geo = data.features
+            //         //let type = data.features[0].geometry.type
+            //         setEditor(geo)
+            //     }
 
             // const onChange = () => {
             //     var data = draw.getAll()
@@ -182,9 +89,9 @@ export default function Map() {
 
 
             map.current.addControl(new maplibregl.NavigationControl(), 'top-right');
-                    new maplibregl.Marker({color: "#FF0000"})
-                        .setLngLat([28.7,41.2])
-                        .addTo(map.current);
+                    // new maplibregl.Marker({color: "#FF0000"})
+                    //     .setLngLat([28.7,41.2])
+                    //     .addTo(map.current);
 
             // map.current.on('click', draw, function (e) {
             //         var coords = e.features[0].geometry.coordinates.slice()
@@ -306,138 +213,141 @@ export default function Map() {
                     //         });
                     
                     // setEditor(displayFeatures)
-                    // var geojson = {
-                    //     'type': 'FeatureCollection',
-                    //     'features': []
-                    // }
-        
-                    // var poi = {
-                    //     'type': 'Feature',
-                    //     'geometry': {
-                    //     'type': 'Point',
-                    //     'coordinates': []
-                    //     }
-                    // }
-        
-                    // var linestring = {
-                    //     'type': 'Feature',
-                    //     'geometry': {
-                    //     'type': 'LineString',
-                    //     'coordinates': []
-                    //     }
-                    // }
-        
-                    // // var polygon = {
-                    // //     'type': 'Feature',
-                    // //     'geometry': {
-                    // //     'type': 'Polygon',
-                    // //     'coordinates': []
-                    // //     }
-                    // // }
-        
-                    // map.current.on('load', function () {
-                    //     map.current.addSource('geojson', {
-                    //     'type': 'geojson',
-                    //     'data': geojson
-                    //     });
-                         
-                    //     map.current.addLayer({
-                    //         id: 'measure-points',
-                    //         type: 'circle',
-                    //         source: 'geojson',
-                    //         paint: {
-                    //             'circle-radius': 5,
-                    //             'circle-color': '#000'
-                    //         },
-                    //         filter: ['in', '$type', 'Point']
-                    //     });
-        
-                    //     map.current.addLayer({
-                    //         id: 'measure-lines',
-                    //         type: 'line',
-                    //         source: 'geojson',
-                    //         layout: {
-                    //             'line-cap': 'round',
-                    //             'line-join': 'round'
-                    //             },
-                    //         paint: {
-                    //             'line-color': '#000',
-                    //             'line-width': 2.5
-                    //             },
-                    //         filter: ['in', '$type', 'LineString']
-                    //     });
-                    // })
-        
-                    // map.current.on('click', function (e) {
-                    //     var features = map.current.queryRenderedFeatures(e.point, {
-                    //     layers: ['measure-points']
-                    //     });
-        
-                    //     if (geojson.features.length > 1) geojson.features.pop();
-                        
-                    //     if (features.length) {
-                    //         var id = features[0].properties.id;
-                    //         geojson.features = geojson.features.filter(function (point) {
-                    //         return point.properties.id !== id;
-                    //         });
-                    //         } 
-                    //             else {
-                    //                 var point = {
-                    //                     'type': 'Feature',
-                    //                     'geometry': {
-                    //                         'type': 'Point',
-                    //                         'coordinates': [e.lngLat.lng, e.lngLat.lat]
-                    //                         },
-                    //                     'properties': {
-                    //                         'id': String(new Date().getTime())
-                    //                         }
-                    //                 };
-                             
-                    //         geojson.features.push(point);
-                    //         console.log(geojson)
-                    //         }
-                             
-                    //         if (geojson.features.length > 1) {
-                    //             linestring.geometry.coordinates = geojson.features.map(
-                    //                 function (point) {
-                    //                 return point.geometry.coordinates;
-                    //                 }
-                    //         );
-                             
-                    //         geojson.features.push(linestring);
-                    //         //setEditor(geojson.features)
-        
-                    //         if (geojson.features.length < 1) {
-                    //             poi.geometry.coordinates = geojson.features.map(
-                    //                 function (point) {
-                    //                 return point.geometry.coordinates
-                    //                 }
-                    //             )
-                    //         }
-                    //     }
-        
-                    //         map.current.getSource('geojson').setData(geojson);
-                    // })
-        
-                    //         map.current.on('mousemove', function (e) {
-                    //             var features = map.current.queryRenderedFeatures(e.point, {
-                    //             layers: ['measure-points']
-                    //             });
 
-                    //             map.current.getCanvas().style.cursor = features.length
-                    //             ? 'pointer'
-                    //             : 'crosshair';
-                    //             });
-                
-                    //     setEditor(geojson)
-    
+
+                    var geojson = {
+                        'type': 'FeatureCollection',
+                        'features': []
+                    }
+        
+                    var poi = {
+                        'type': 'Feature',
+                        'geometry': {
+                        'type': 'Point',
+                        'coordinates': []
+                        }
+                    }
+        
+                    var linestring = {
+                        'type': 'Feature',
+                        'geometry': {
+                        'type': 'LineString',
+                        'coordinates': []
+                        }
+                    }
+        
+                //     // var polygon = {
+                //     //     'type': 'Feature',
+                //     //     'geometry': {
+                //     //     'type': 'Polygon',
+                //     //     'coordinates': []
+                //     //     }
+                //     // }
+        
+                    map.current.on('load', function () {
+                        map.current.addSource('geojson', {
+                        'type': 'geojson',
+                        'data': geojson
+                        });
+                         
+                        map.current.addLayer({
+                            id: 'points',
+                            type: 'circle',
+                            source: 'geojson',
+                            paint: {
+                                'circle-radius': 5,
+                                'circle-color': '#888'
+                            },
+                            filter: ['in', '$type', 'Point']
+                        });
+        
+                        map.current.addLayer({
+                            id: 'lines',
+                            type: 'line',
+                            source: 'geojson',
+                            layout: {
+                                'line-cap': 'round',
+                                'line-join': 'round'
+                                },
+                            paint: {
+                                'line-color': '#555',
+                                'line-width': 2.5
+                                },
+                            filter: ['in', '$type', 'LineString']
+                        });
+                    })
+        
+                    map.current.on('click', function (e) {
+                        var features = map.current.queryRenderedFeatures(e.point, {
+                        layers: ['points']
+                        });
+        
+                        if (geojson.features.length > 1) geojson.features.pop();
+                        
+                        if (features.length) {
+                            var id = features[0].properties.id;
+                            geojson.features = geojson.features.filter(function (point) {
+                            return point.properties.id !== id;
+                            });
+                            } 
+                                else {
+                                    var point = {
+                                        'type': 'Feature',
+                                        'geometry': {
+                                            'type': 'Point',
+                                            'coordinates': [e.lngLat.lng, e.lngLat.lat]
+                                            },
+                                        'properties': {
+                                            'id': String(new Date().getTime())
+                                            }
+                                    };
+                             
+                            geojson.features.push(point);
+                            console.log(geojson)
+                            }
+                             
+                            if (geojson.features.length > 1) {
+                                linestring.geometry.coordinates = geojson.features.map(
+                                    function (point) {
+                                    return point.geometry.coordinates;
+                                    }
+                            );
+                             
+                            geojson.features.push(linestring);
+                            setEditor(geojson.features)
+        
+                            if (geojson.features.length < 1) {
+                                poi.geometry.coordinates = geojson.features.map(
+                                    function (point) {
+                                    return point.geometry.coordinates
+                                    }
+                                )
+                            }
+
+                        }
+
+                        else {
+                            if (geojson.features.length === 0)
+                            map.current.off('click', geojson)
+                        }
+                            map.current.getSource('geojson').setData(geojson);
+                            //setEditor(geojson)
+
+                    })
+
+        
+                            map.current.on('mousemove', function (e) {
+                                var features = map.current.queryRenderedFeatures(e.point, {
+                                layers: ['points']
+                                });
+
+                                map.current.getCanvas().style.cursor = features.length
+                                ? 'pointer'
+                                : 'crosshair';
+                                });
+                    
                 })
  
-                //     document.getElementById('features').innerHTML = JSON.stringify(
-                //         displayFeatures,
-                //         null,
-                //         2
-                // );
 
         return (
             <>
@@ -455,9 +365,10 @@ export default function Map() {
                     width: 500
                     }
                 }>
-                    <span onClick={(editor) => getData(JSON.stringify(editor))}></span>
+                    {/* {editor &&<span>{JSON.stringify(editor)}</span>} */}
+                    {/* <span onClick={() => getData(JSON.stringify(editor))}></span> */}
                         <span>
-                            {/* {JSON.stringify(editor)} */}
+                            {JSON.stringify(editor)}
                             {/* {JSON.stringify(type)} */}
                         </span>
                 </div>
